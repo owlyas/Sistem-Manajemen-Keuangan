@@ -62,7 +62,7 @@ public:
 
             switch (pilihan) {
                 case 1: menuDaftarTransaksi(); break;
-                case 2: menuBudgeting(); break;   // 🔥 MENU 2 SUDAH AKTIF
+                case 2: menuBudgeting(); break;  
                 case 3: tampilkanLaporan(); break;
                 case 4: analisisKeuangan(); break;
                 case 5: cout << "Terima kasih telah menggunakan aplikasi ini.\n"; break;
@@ -73,9 +73,7 @@ public:
 
 private:
 
-// =========================================================
-// 🔥🔥🔥 MENU BUDGETING — (yang kamu minta) 
-// =========================================================
+
 void menuBudgeting() {
     int pilih;
     char lanjut = 'y';
@@ -185,6 +183,8 @@ void catatIncome() {
         totalIncome += jml;
 
         cout << "\n✅ INCOME BERHASIL DICATAT!" << endl;
+        cout << "➡ TOTAL INCOME SAAT INI: Rp " << fixed << setprecision(2) << totalIncome << endl;
+
 
         cout << "Catat income lagi? (y/t): ";
         cin >> lanjut;
@@ -244,6 +244,20 @@ void catatExpense() {
         totalExpense += jml;
 
         cout << "\n✅ PENGELUARAN BERHASIL DICATAT!" << endl;
+        cout << "➡ TOTAL PENGELUARAN SAAT INI: Rp " << fixed << setprecision(2) << totalExpense << endl;
+
+        // 🔥 Hitung sisa budget kategori
+        if (budgetKategori.find(kategori) != budgetKategori.end()) {
+            double sisaBudget = budgetKategori[kategori] - jml;
+            budgetKategori[kategori] = sisaBudget; // update sisa budget
+            cout << "➡ SISA BUDGET KATEGORI '" << kategori << "': Rp " 
+                 << fixed << setprecision(2) << (sisaBudget >= 0 ? sisaBudget : 0) << endl;
+            if (sisaBudget < 0) {
+                cout << "⚠️ Budget kategori ini sudah terlampaui!" << endl;
+            }
+        } else {
+            cout << "⚠️ Belum ada budget untuk kategori '" << kategori << "'." << endl;
+        }
 
         cout << "Catat pengeluaran lagi? (y/t): ";
         cin >> lanjut;
@@ -253,9 +267,8 @@ void catatExpense() {
     } while (lanjut == 'y');
 }
 
-// =========================================================
-// Laporan & Analisis (tidak diubah)
-// =========================================================
+
+
 
 void tampilkanRingkasan() const {
     double saldoAkhir = totalIncome - totalExpense;
