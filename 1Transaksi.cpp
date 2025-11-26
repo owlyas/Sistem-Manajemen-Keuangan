@@ -10,7 +10,7 @@ void FiturTransaksi::catatIncome(vector<Transaksi> &daftarTransaksi, double &tot
     char lanjut = 'y';
 
     cout << "\n=======================================\n";
-    cout << "         💸 SUB-MENU: CATAT INCOME      \n";
+    cout << "           SUB-MENU: CATAT INCOME      \n";
     cout << "=======================================\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 

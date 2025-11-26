@@ -54,5 +54,22 @@ void FiturBudget::menuBudgeting(map<string,double> &budgetKategori) {
 
     } while (lanjut == 'y');
 
+    if (!budgetKategori.empty()) {
+        cout << "\n=======================================\n";
+        cout << "        📊 RANGKUMAN BUDGET SAAT INI   \n";
+        cout << "=======================================\n";
+
+        cout << left << setw(20) << "Kategori"
+             << right << setw(15) << "Budget (Rp)" << endl;
+        cout << string(35, '-') << endl;
+
+        for (const auto &pair : budgetKategori) {
+            cout << left << setw(20) << pair.first
+                 << right << "Rp " << fixed << setprecision(2) << pair.second << endl;
+        }
+    } else {
+        cout << "\nBelum ada budget yang diinput.\n";
+    }
+
     cout << "\nKembali ke Menu Utama...\n";
 }
