@@ -31,31 +31,9 @@ void AppCLI::run() {
 
         switch (pilihan) {
             case 1:
-                // sub menu transaksi
-                {
-                    int sub;
-                    do {
-                        cout << "\n--- 1. Catat TRANSAKSI ---\n";
-                        cout << "1. Catat Income (Pemasukan)\n";
-                        cout << "2. Catat Expense (Pengeluaran)\n";
-                        cout << "3. Kembali ke Menu Utama\n";
-                        cout << "Pilih opsi (1-3): ";
-
-                        if (!(cin >> sub)) {
-                            cin.clear();
-                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                            sub = 0;
-                        }
-
-                        switch (sub) {
-                            case 1: fiturTransaksi.catatIncome(daftarTransaksi, totalIncome); break;
-                            case 2: fiturTransaksi.catatExpense(daftarTransaksi, totalExpense, budgetKategori); break;
-                            case 3: cout << "Kembali...\n"; break;
-                            default: cout << "Pilihan tidak valid.\n";
-                        }
-                    } while (sub != 3);
-                }
+                fiturTransaksi.menuTransaksi(daftarTransaksi, totalIncome, totalExpense, budgetKategori);
                 break;
+
             case 2:
                 fiturBudget.menuBudgeting(budgetKategori);
                 break;

@@ -12,6 +12,12 @@ public:
     void catatExpense(std::vector<Transaksi> &daftarTransaksi,
                       double &totalExpense,
                       std::map<std::string,double> &budgetKategori);
+    
+void menuTransaksi(std::vector<Transaksi> &daftarTransaksi,
+                   double &totalIncome,
+                   double &totalExpense,
+                   std::map<std::string,double> &budgetKategori);
+
 };
 
 #endif

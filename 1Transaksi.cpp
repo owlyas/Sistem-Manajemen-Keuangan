@@ -98,10 +98,9 @@ void FiturTransaksi::catatExpense(vector<Transaksi> &daftarTransaksi,
         cout << "\n✅ PENGELUARAN BERHASIL DICATAT!\n";
         cout << "TOTAL PENGELUARAN SAAT INI: Rp " << fixed << setprecision(2) << totalExpense << endl;
 
-        // Hitung sisa budget kategori
         if (budgetKategori.find(kategori) != budgetKategori.end()) {
             double sisaBudget = budgetKategori[kategori] - jml;
-            budgetKategori[kategori] = sisaBudget; // update sisa budget
+            budgetKategori[kategori] = sisaBudget;
             cout << "➡ SISA BUDGET KATEGORI '" << kategori << "': Rp " 
                  << fixed << setprecision(2) << (sisaBudget >= 0 ? sisaBudget : 0) << endl;
             if (sisaBudget < 0) {
@@ -117,4 +116,45 @@ void FiturTransaksi::catatExpense(vector<Transaksi> &daftarTransaksi,
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
     } while (lanjut == 'y');
+}
+
+
+// ---------------------------------------------------------------
+//           ⬇⬇⬇  FUNGSI YANG BENAR UNTUK SUB-MENU  ⬇⬇⬇
+// ---------------------------------------------------------------
+
+void FiturTransaksi::menuTransaksi(vector<Transaksi> &daftarTransaksi,
+                                   double &totalIncome,
+                                   double &totalExpense,
+                                   map<string,double> &budgetKategori) {
+    int sub;
+
+    do {
+        cout << "\n--- SUB-MENU: TRANSAKSI ---\n";
+        cout << "1. Catat Income (Pemasukan)\n";
+        cout << "2. Catat Expense (Pengeluaran)\n";
+        cout << "3. Kembali ke Menu Utama\n";
+        cout << "Pilih opsi (1-3): ";
+
+        if (!(cin >> sub)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            sub = 0;
+        }
+
+        switch (sub) {
+            case 1: 
+                catatIncome(daftarTransaksi, totalIncome);
+                break;
+            case 2:
+                catatExpense(daftarTransaksi, totalExpense, budgetKategori);
+                break;
+            case 3:
+                cout << "Kembali ke Menu Utama...\n";
+                break;
+            default:
+                cout << "Pilihan tidak valid.\n";
+        }
+
+    } while (sub != 3);
 }
