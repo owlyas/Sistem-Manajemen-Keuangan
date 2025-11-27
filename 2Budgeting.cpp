@@ -16,7 +16,7 @@ void FiturBudget::menuBudgeting(map<string,double> &budgetKategori) {
 
     do {
         cout << "\n=======================================\n";
-        cout << "              🧾 MENU BUDGETING         \n";
+        cout << "              MENU BUDGETING         \n";
         cout << "=======================================\n";
 
         cout << "Pilih kategori untuk di-budget:\n";
@@ -56,7 +56,7 @@ void FiturBudget::menuBudgeting(map<string,double> &budgetKategori) {
 
     if (!budgetKategori.empty()) {
         cout << "\n=======================================\n";
-        cout << "        📊 RANGKUMAN BUDGET SAAT INI   \n";
+        cout << "        RANGKUMAN BUDGET SAAT INI   \n";
         cout << "=======================================\n";
 
         cout << left << setw(20) << "Kategori"

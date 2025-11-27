@@ -7,7 +7,9 @@ using namespace std;
 
 void FiturAnalisis::tampilkanTop5Pengeluaran(const vector<Transaksi> &daftarTransaksi) const {
     vector<Transaksi> pengeluaranList;
-    for (const auto &t : daftarTransaksi) {
+
+    for (size_t i = 0; i < daftarTransaksi.size(); ++i) {
+        const Transaksi &t = daftarTransaksi[i];
         if (t.tipe == "Pengeluaran") {
             pengeluaranList.push_back(t);
         }
@@ -18,9 +20,9 @@ void FiturAnalisis::tampilkanTop5Pengeluaran(const vector<Transaksi> &daftarTran
         return;
     }
 
-    int n = pengeluaranList.size();
+    int n = static_cast<int>(pengeluaranList.size());
 
-    // SELECTION SORT DESC (jumlah terbesar)
+    // SELECTION SORT DESC 
     for (int i = 0; i < n - 1 && i < 5; ++i) {
         int idxMax = i;
         for (int j = i + 1; j < n; ++j) {
@@ -56,7 +58,9 @@ void FiturAnalisis::tampilkanBudgetVsActual(const vector<Transaksi> &daftarTrans
     // Hitung total pengeluaran per kategori
     map<string,double> totalPengeluaranPerKategori;
 
-    for (const auto &t : daftarTransaksi) {
+    for (size_t i = 0; i < daftarTransaksi.size(); ++i) {
+        const Transaksi &t = daftarTransaksi[i];
+
         if (t.tipe == "Pengeluaran") {
             string kategori = "Lainnya";
             size_t p1 = t.deskripsi.find('[');
@@ -74,9 +78,12 @@ void FiturAnalisis::tampilkanBudgetVsActual(const vector<Transaksi> &daftarTrans
     cout << "| Kategori       | Budget Awal  | Pengeluaran  | Sisa Budget  | % Realisasi  | Status            |\n";
     cout << "+----------------+--------------+--------------+--------------+--------------+-------------------+\n";
 
-    for (const auto &b : budgetKategori) {
-        string kategori = b.first;
-        double sisaSekarang = b.second;
+    // Iterasi map budgetKategori tanpa auto
+    for (map<string,double>::const_iterator it = budgetKategori.begin();
+         it != budgetKategori.end(); ++it) {
+
+        string kategori = it->first;
+        double sisaSekarang = it->second;
 
         double totalPengeluaran = 0.0;
         if (totalPengeluaranPerKategori.count(kategori)) {
@@ -122,8 +129,9 @@ void FiturAnalisis::analisisKeuangan(const vector<Transaksi> &daftarTransaksi,
                                      double totalIncome,
                                      double totalExpense,
                                      const map<string,double> &budgetKategori) const {
+                                        
     cout << "\n=======================================\n";
-    cout << "        📈 ANALISIS KEUANGAN           \n";
+    cout << "        ANALISIS KEUANGAN           \n";
     cout << "=======================================\n";
 
     if (daftarTransaksi.empty()) {

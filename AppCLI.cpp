@@ -8,7 +8,7 @@ AppCLI::AppCLI() : totalIncome(0.0), totalExpense(0.0) {}
 
 void AppCLI::tampilkanMenuUtama() const {
     cout << "\n=======================================\n";
-    cout << "    APLIKASI MANAJEMEN KEUANGAN (CLI)    \n";
+    cout << "      SELAMAT DATANG DI MY MONEY         \n";
     cout << "=======================================\n";
     cout << "1. Catat Transaksi (Catat Income/Expense)\n";
     cout << "2. Budgeting\n";

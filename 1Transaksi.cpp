@@ -56,7 +56,7 @@ void FiturTransaksi::catatExpense(vector<Transaksi> &daftarTransaksi,
     };
 
     cout << "\n=======================================\n";
-    cout << "      🛒 SUB-MENU: CATAT PENGELUARAN    \n";
+    cout << "      SUB-MENU: CATAT PENGELUARAN    \n";
     cout << "=======================================\n";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 

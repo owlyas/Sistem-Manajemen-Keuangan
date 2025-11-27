@@ -18,7 +18,7 @@ void FiturLaporan::tampilkanLaporan(const vector<Transaksi> &daftarTransaksi,
                                     double totalIncome,
                                     double totalExpense) const {
     cout << "\n=======================================\n";
-    cout << "          📜 LAPORAN KEUANGAN          \n";
+    cout << "          LAPORAN KEUANGAN          \n";
     cout << "=======================================\n";
 
     if (daftarTransaksi.empty()) {
@@ -30,8 +30,9 @@ void FiturLaporan::tampilkanLaporan(const vector<Transaksi> &daftarTransaksi,
     cout << "| Tanggal    | Deskripsi                                | Jumlah (Rp)  | Tipe Transaksi   |\n";
     cout << "+------------+------------------------------------------+--------------+------------------+\n";
 
-    for (const auto &t : daftarTransaksi)
-        t.tampilkan();
+    for (size_t i = 0; i < daftarTransaksi.size(); ++i) {
+        daftarTransaksi[i].tampilkan();
+    }
 
     cout << "+------------+------------------------------------------+--------------+------------------+\n";
 
@@ -46,7 +47,7 @@ void FiturLaporan::cariTransaksi(const vector<Transaksi> &daftarTransaksi) {
 
     int metode;
     cout << "\n=======================================\n";
-    cout << "            🔍 CARI TRANSAKSI           \n";
+    cout << "              CARI TRANSAKSI           \n";
     cout << "=======================================\n";
     cout << "Cari berdasarkan:\n";
     cout << "1. Tanggal\n";
@@ -62,31 +63,41 @@ void FiturLaporan::cariTransaksi(const vector<Transaksi> &daftarTransaksi) {
     }
 
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    vector<Transaksi> hasil;
+
+    vector<Transaksi> ketemu;
 
     if (metode == 1) {
         string tgl;
         cout << "Masukkan tanggal (YYYY-MM-DD): ";
         getline(cin, tgl);
 
-        for (auto &t : daftarTransaksi)
-            if (t.tanggal == tgl) hasil.push_back(t);
+        for (size_t i = 0; i < daftarTransaksi.size(); ++i) {
+            if (daftarTransaksi[i].tanggal == tgl) {
+                ketemu.push_back(daftarTransaksi[i]);
+            }
+        }
 
     } else if (metode == 2) {
         string key;
         cout << "Masukkan kata kunci deskripsi: ";
         getline(cin, key);
 
-        for (auto &t : daftarTransaksi)
-            if (t.deskripsi.find(key) != string::npos) hasil.push_back(t);
+        for (size_t i = 0; i < daftarTransaksi.size(); ++i) {
+            if (daftarTransaksi[i].deskripsi.find(key) != string::npos) {
+                ketemu.push_back(daftarTransaksi[i]);
+            }
+        }
 
     } else if (metode == 3) {
         string tp;
         cout << "Masukkan tipe (Pemasukan/Pengeluaran): ";
         getline(cin, tp);
 
-        for (auto &t : daftarTransaksi)
-            if (t.tipe == tp) hasil.push_back(t);
+        for (size_t i = 0; i < daftarTransaksi.size(); ++i) {
+            if (daftarTransaksi[i].tipe == tp) {
+                ketemu.push_back(daftarTransaksi[i]);
+            }
+        }
 
     } else {
         cout << "Pilihan tidak valid.\n";
@@ -95,7 +106,7 @@ void FiturLaporan::cariTransaksi(const vector<Transaksi> &daftarTransaksi) {
 
     cout << "\n--- HASIL PENCARIAN ---\n";
 
-    if (hasil.empty()) {
+    if (ketemu.empty()) {
         cout << "Tidak ada transaksi yang ditemukan.\n";
         return;
     }
@@ -104,7 +115,9 @@ void FiturLaporan::cariTransaksi(const vector<Transaksi> &daftarTransaksi) {
     cout << "| Tanggal    | Deskripsi                                | Jumlah (Rp)  | Tipe Transaksi   |\n";
     cout << "+------------+------------------------------------------+--------------+------------------+\n";
 
-    for (auto &t : hasil) t.tampilkan();
+    for (size_t i = 0; i < ketemu.size(); ++i) {
+        ketemu[i].tampilkan();
+    }
 
     cout << "+------------+------------------------------------------+--------------+------------------+\n";
 }
@@ -116,7 +129,7 @@ void FiturLaporan::menuLaporanKeuangan(const vector<Transaksi> &daftarTransaksi,
 
     do {
         cout << "\n=======================================\n";
-        cout << "            📘 LAPORAN KEUANGAN        \n";
+        cout << "            LAPORAN KEUANGAN        \n";
         cout << "=======================================\n";
         cout << "1. Daftar Semua Transaksi\n";
         cout << "2. Cari Transaksi (Searching)\n";
